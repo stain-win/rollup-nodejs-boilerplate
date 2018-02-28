@@ -1,0 +1,49 @@
+{
+  "name": "rollup-node-boilerplate",
+  "version": "0.1.0",
+  "description": "lib boilerplate rollup babel",
+  "main": "main.js",
+  "scripts": {
+    "cleanup": "rimraf build && mkdir build && json2module package.json > build/package.js",
+    "pretest": "npm run cleanup && node builder.node",
+    "test": "npm run pretest tape 'test/**/*-test.js'",
+    "build": "npm run test && rollup -c --banner \"$(preamble)\" && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" build/libname.js -c negate_iife=false -m -o build/libname.min.js",
+    "testless-build": "rollup -c --banner \"$(preamble)\" && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" build/libname.js -c negate_iife=false -m -o build/libname.min.js"
+  },
+  "keywords": [
+      "rollup",
+      "boilerplate",
+      "d3",
+      "nodejs"
+  ],
+  "author": {
+    "name": "Miroslav Mitrovic",
+    "url": ""
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
+    "jsdom": "^11.3.0",
+    "json2module": "0.0.3",
+    "npm": "^5.5.1",
+    "package-preamble": "^0.1.0",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-visualizer": "^0.3.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0",
+    "uglify-js": "^3.1.6"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "d3-chord": "^1.0.4"
+  }
+}
